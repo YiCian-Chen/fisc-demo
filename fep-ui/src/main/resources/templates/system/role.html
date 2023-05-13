@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<h1>權限維護</h1>
+<a th:href="@{/role/detail?action=A}" >新增Role</a>
+<form th:action="@{/role}">
+<input name="roleId" placeholder="Role ID"> <input type="submit" value="查詢" />
+</form>
+<table>
+    <thead>
+        <tr><th>roleId</th><th>權限名稱</th><th>敘述</th><th>動作</th></tr>
+    </thead>
+    <tbody id="content">
+        <form th:action="@{/role/detail}" id="detail" name="detail">
+            <tr th:each="role : ${roles}" th:if="${roles}" >
+                <td th:text="${role.roleId}"></td>
+                <td th:text="${role.roleName}"></td>
+                <td th:text="${role.roleDesc}"></td>
+                <td th:id="${role.roleId}">
+                    <a href="#" onclick="getDetail(this, 'M')">修改</a>
+                    <a href="#" onclick="getDetail(this, 'D')">刪除</a>
+                </td>
+            </tr>
+            <input type="hidden" id="roleId" name="roleId" />
+            <input type="hidden" id="action" name="action" />
+        </form>
+    </tbody>
+</table>
+<script>
+    function getDetail(dom, action){
+        let td = dom.parentElement;
+        document.querySelector('#roleId').value=td.id;
+        document.querySelector('#action').value=action;
+        if(action == 'D') {
+            document.querySelector('#detail').method = "POST"
+        }
+        document.querySelector('#detail').submit();
+    }
+</script>
+
+</html>

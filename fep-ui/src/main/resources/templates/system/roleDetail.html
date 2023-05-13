@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<h1>權限維護</h1>
+<h2 th:text="${actionLabel}"></h2>
+<form th:action="@{/role/detail}" method="POST">
+    <input th:if="${action == 'M'}" th:value="${role.roleId}" disabled="true"/><br>
+    <input type="text" name="roleName" th:value="${role.roleName}" placeholder="權限名稱"/><br>
+    <input type="text" name="roleDesc" th:value="${role.roleDesc}" placeholder="權限敘述"/><br>
+    <input type="hidden" name="action" th:value="${action}">
+    <input th:if="${action == 'M'}" type="hidden" name="roleId" th:value="${role.roleId }">
+<input type="submit" value="送出">
+</form>
+</html>

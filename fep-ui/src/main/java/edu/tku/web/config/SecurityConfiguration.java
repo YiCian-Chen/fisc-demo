@@ -29,7 +29,7 @@ public class SecurityConfiguration {
                 .failureHandler(((request, response, exception) -> {
                     log.error("Loging failed, " + exception.getMessage());
                     response.setStatus(401);
-                })).defaultSuccessUrl("/", true)).build();
+                })).defaultSuccessUrl("/", true)).csrf().disable().build();
     }
 
     @Bean

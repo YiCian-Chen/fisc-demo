@@ -21,9 +21,6 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-
-
-
         return new BCryptPasswordEncoder().encode("1qaz@WSX");
     }
 
