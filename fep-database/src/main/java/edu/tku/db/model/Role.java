@@ -3,10 +3,7 @@ package edu.tku.db.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Table(name = "SYS_ROLE")
@@ -21,4 +18,7 @@ public class Role {
     private String roleDesc;
     @Column(name = "functions")
     private String functions;
+
+    @Transient
+    private String action;
 }

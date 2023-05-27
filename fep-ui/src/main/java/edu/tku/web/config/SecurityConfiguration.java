@@ -22,14 +22,16 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeRequests(authorizeRequests ->
                 authorizeRequests
-                        .antMatchers("/login", "/static/**", "/h2-console/**").permitAll()
+                        .antMatchers("/login", "/js/**", "/css/**", "/h2-console/**").permitAll()
                         .antMatchers("/api/v1/**").permitAll()
                         .anyRequest().authenticated()).formLogin(formLogin -> formLogin.loginPage("/login").permitAll()
                 .usernameParameter("uid").passwordParameter("pwd")
                 .failureHandler(((request, response, exception) -> {
                     log.error("Loging failed, " + exception.getMessage());
-                    response.setStatus(401);
-                })).defaultSuccessUrl("/", true)).csrf().disable().build();
+                    response.sendRedirect("/login?error=true");
+                })).defaultSuccessUrl("/", true)).logout(httpSecurityLogoutConfigurer -> {
+            httpSecurityLogoutConfigurer.logoutUrl("/logout").logoutSuccessUrl("/login").permitAll();
+        }).build();
     }
 
     @Bean

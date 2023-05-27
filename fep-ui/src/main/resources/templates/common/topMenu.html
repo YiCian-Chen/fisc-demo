@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style id="antiClickjack">body {
+        display: none !important;
+    }</style>
+    <script>
+        if (self === top) {
+            var antiClickjack = document.getElementById("antiClickjack");
+            antiClickjack.parentNode.removeChild(antiClickjack);
+        }
+    </script>
+</head>
+<body>
+<th:block th:fragment="topMenu">
+    <nav class="navbar navbar-expand-lg bg-primary">
+        <div class="container-fluid ">
+            <a class="navbar-brand" th:href="@{/}">TKU</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            維護設定
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/role}">權限維護</a></li>
+                            <li><a class="dropdown-item" th:href="@{/bank}">銀行檔維護</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <form th:action="@{/logout}" method="post" class="mb-0">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                <input type="hidden" name="_csrf_header" th:value="${_csrf.headerName}"/>
+                <input type="submit" class="btn btn-danger" value="登出">
+            </form>
+        </div>
+    </nav>
+</th:block>
+</body>

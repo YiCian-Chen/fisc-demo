@@ -1,10 +1,75 @@
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        .divider:after,
+        .divider:before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
+        }
+        .h-custom {
+            height: calc(100% - 73px);
+        }
+        @media (max-width: 450px) {
+            .h-custom {
+                height: 100%;
+            }
+        }
+    </style>
+</head>
 <body>
-    <h1>歡迎使用本系統 </h1>
-    <form th:action="@{/login}" method="POST" >
-        <input type="text" name="uid" placeholder="帳號">
-        <input type="text" name="pwd" placeholder="密碼">
-        <button type="submit" >登入</button>
-    </form>
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                     class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 offset-sm-1">
+                <form th:action="@{/login}" method="POST" >
+                    <div class="align-items-center w-100">
+                        <div class="alert alert-danger " role="alert" th:if="${error}" th:text="${error}">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                        <p class="lead fw-normal mb-0 me-3">Welcome to</p>
+                        <p class="lead fw-normal mb-0 me-3 text-danger font-weight-bold">TKU教學網頁</p>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                        &nbsp;
+                    </div>
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="uid">帳號</label>
+                        <input type="text" id="uid" name="uid" class="form-control form-control-lg" value="" placeholder="使用者帳號" />
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                        <label class="form-label" for="pwd">密碼</label>
+                        <input type="password" id="pwd" name="pwd" class="form-control form-control-lg"  placeholder="密碼" />
+                    </div>
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <input type="submit" class="btn btn-primary btn-lg" value="Login" style="padding-left: 2.5rem; padding-right: 2.5rem;" />
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div
+            class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+        <!-- Copyright -->
+        <div class="text-white mb-3 mb-md-0">
+            Copyright © 2020. All rights reserved.
+        </div>
+
+    </div>
+</section>
 </body>
 </html>

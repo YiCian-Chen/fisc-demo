@@ -1,32 +1,31 @@
 package edu.tku.web.entity;
 
+import edu.tku.db.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
-    private String userName;
-    private String password;
-    public CustomUserDetails(String userName) {
-        this.userName = userName;
+    private User user;
+    public CustomUserDetails(User user) {
+        this.user = user;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.createAuthorityList("USER");
+        return AuthorityUtils.createAuthorityList(user.getRoleId());
     }
 
     @Override
     public String getPassword() {
-        return new BCryptPasswordEncoder().encode("1qaz@WSX");
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userName;
+        return user.getUserName();
     }
 
     @Override
@@ -46,7 +45,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return user.isEnabled();
     }
 
 }

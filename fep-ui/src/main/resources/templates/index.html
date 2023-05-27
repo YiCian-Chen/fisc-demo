@@ -1,6 +1,17 @@
-<html xmlns:th="http://www.thymeleaf.org">
-<h1>Hello world</h1>
-<h2 th:text="${name}"></h2>
-
-<a href="/role" >權限維護</a>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{common/indexLayout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body class="w-100 text-center">
+<div layout:fragment="content">
+    <div class="card">
+        <div class="card-header" >
+            <h2 th:text="${'Welcome, ' + name}"></h2>
+        </div>
+        <div class="card-body" >
+            <h5 class="card-title">This is a simple Spring Boot application.</h5>
+            <p class="card-text">You can use this application to learn how to use Spring Boot.</p>
+            <a href="https://spring.io/projects/spring-boot" class="btn btn-primary">Learn more</a>
+        </div>
+    </div>
+</div>
+</body>
 </html>

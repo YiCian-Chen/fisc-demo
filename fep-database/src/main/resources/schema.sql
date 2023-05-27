@@ -15,7 +15,7 @@ create table if not exists SYS_USER (
 create table if not exists SYS_ROLE (
     role_id varchar(36) not null PRIMARY KEY ,
     role_name varchar(150) not null ,
-    functions text not null ,
+    functions text ,
     role_desc varchar(150) not null
 );
 
