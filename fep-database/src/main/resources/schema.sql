@@ -38,10 +38,10 @@ create table if not exists ACCESS_LOG (
     response_message text not null
 );
 
-CREATE TABLE FISC_BANK (
-    BANKCODE VARCHAR(3) PRIMARY KEY,
-    BANKNAME VARCHAR(36),
-    TELZONE VARCHAR(3),
-    TELNO VARCHAR(10),
-    UPDATEDATE VARCHAR(8)
+CREATE TABLE if not exists FISC_BANK (
+    BANK_id VARCHAR(7) PRIMARY KEY,
+    BANK_name VARCHAR(50),
+    BANK_address VARCHAR(150),
+    Bank_tel VARCHAR(15),
+    enabled Boolean
 );

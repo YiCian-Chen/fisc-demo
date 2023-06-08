@@ -26,13 +26,10 @@
                     <label for="roleDesc">敘述</label>
                 </div>
                 <div class="form-floating mb-3" >
-                    <!-- <input type="checkbox" th:each="func, iterStat : ${funcs}" th:if="${!funcs.isEmpty() && func.funcUrl != '#' && func.funcName eq 'Group Setting'}" th:text="${func.funcName}" th:checked="${func.funcName eq 'Group Setting'}" td:field="${func.funcId}">
-                        <input type="checkbox" th:each="func, iterStat : ${funcs}" th:if="${!funcs.isEmpty() && func.funcUrl != '#' && func.funcName eq 'Permission Setting'}" th:text="${func.funcName}" th:checked="${func.funcName eq 'Permission Setting'}" td:field="${func.funcId}">
-                        <input type="checkbox" th:each="func, iterStat : ${funcs}" th:if="${!funcs.isEmpty() && func.funcUrl != '#' && func.funcName eq 'Bank Setting'}" th:text="${func.funcName}" th:checked="${func.funcName eq 'Bank Setting'}" td:field="${func.funcId}"> -->
-                        <input type="hidden" th:name="user" th:id="userHidden" th:value="off" >
-                        <input type="hidden" th:name="role" th:id="roleHidden" th:value="off">
-                        <input type="hidden" th:name="permission" th:id="permissionHidden" th:value="off">
-                        <input type="hidden" th:name="bank" th:id="bankHidden" th:value="off">
+                    <input type="hidden" th:name="user" th:id="userHidden" th:value="off" >
+                    <input type="hidden" th:name="role" th:id="roleHidden" th:value="off">
+                    <input type="hidden" th:name="permission" th:id="permissionHidden" th:value="off">
+                    <input type="hidden" th:name="bank" th:id="bankHidden" th:value="off">
                 </div>
                 <div style="text-align: left;">
                     <div>
@@ -54,9 +51,7 @@
                 </div>
 
                 <input type="hidden" name="action" />
-                <a href="#" class="btn btn-sm btn-primary mx-2" onclick="submit('C')" th:if="*{roleId == null || roleId == ''}">新增</a>
                 <a href="#" class="btn btn-sm btn-primary mx-2" onclick="submit('U')" th:if="*{roleId != null && roleId != ''}">更新</a>
-                <a href="#" class="btn btn-sm btn-danger mx-2" onclick="submit('D')" th:if="*{roleId != null && roleId != ''}">刪除</a>
                 <a th:href="@{/permission}" class="btn btn-sm btn-secondary mx-2" >返回</a>
             </form>
         </div>

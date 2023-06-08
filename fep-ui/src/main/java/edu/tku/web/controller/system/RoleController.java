@@ -14,7 +14,6 @@ import edu.tku.web.entity.CustomUserDetails;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class RoleController {
@@ -49,7 +48,10 @@ public class RoleController {
         if(role.getAction().equals("D")) {
             roleRepository.deleteById(role.getRoleId());
         }else {
-            role.setFunctions("{\"folder.system\":[],\"system.users\":[\"q\",\"m\"],\"system.roles\":[\"q\",\"m\"],\"system.permissions\":[\"q\",\"m\"],\"folder.fisc\":[],\"fisc.banks\":[\"q\",\"m\"]}");
+            if (role.getAction().equals("C"))
+                role.setFunctions("{\"folder.system\":[],\"system.users\":[\"q\",\"m\"],\"system.roles\":[\"q\",\"m\"],\"system.permissions\":[\"q\",\"m\"],\"folder.fisc\":[],\"fisc.banks\":[\"q\",\"m\"]}");
+            else if (role.getAction().equals("U"))
+                role.setFunctions(roleRepository.findById(role.getRoleId()).get().getFunctions());
             roleRepository.save(role);
         }
         model.addAttribute("roles", roleRepository.findAll());

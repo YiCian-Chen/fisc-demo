@@ -14,7 +14,6 @@ import edu.tku.web.entity.CustomUserDetails;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class BankController {
@@ -24,10 +23,10 @@ public class BankController {
     private FuncRepository funcRepository;
 
     @GetMapping("/bank")
-    public String page(Model model, @RequestParam(name = "bankcode", required = false) String bankcode) {
+    public String page(Model model, @RequestParam(name = "bankId", required = false) String bankId) {
         List<Bank> banks = new ArrayList<>();
-        if(bankcode != null && !bankcode.equals("")) {
-            bankRepository.findById(bankcode).ifPresent(bank -> banks.add(bank));
+        if(bankId != null && !bankId.equals("")) {
+            bankRepository.findById(bankId).ifPresent(bank -> banks.add(bank));
         }else{
             banks.addAll(bankRepository.findAll());
         }
@@ -37,8 +36,8 @@ public class BankController {
         return "fisc/bank";
     }
     @GetMapping("/bank/detail")
-    public String pageDetail(Model model, @RequestParam(name = "bankCode", required = false) String bankCode) {
-        Bank bank = bankRepository.findById(StringUtils.defaultString(bankCode, "")).orElse(new Bank());
+    public String pageDetail(Model model, @RequestParam(name = "bankId", required = false) String bankId) {
+        Bank bank = bankRepository.findById(StringUtils.defaultString(bankId, "")).orElse(new Bank());
         model.addAttribute("bank", bank);
         
         get_TopMenu(model);
@@ -47,8 +46,9 @@ public class BankController {
     @PostMapping("/bank")
     public String pageDetail(Model model, @ModelAttribute Bank bank) {
         if(bank.getAction().equals("D")) {
-            bankRepository.deleteById(bank.getBankCode());
+            bankRepository.deleteById(bank.getBankId());
         }else {
+            bank.setEnabled(true);
             bankRepository.save(bank);
         }
         model.addAttribute("banks", bankRepository.findAll());

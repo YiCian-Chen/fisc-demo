@@ -27,12 +27,8 @@
                         <a class="nav-link dropdown-toggle text-white" href="#" role="button" 
                             data-bs-toggle="dropdown" aria-expanded="false"
                             th:text="${func1.funcName}">
-                            <!-- 維護設定 -->
                         </a>
                         <ul class="dropdown-menu">
-                            <!-- <li><a class="dropdown-item" th:href="@{/role}">權限維護</a></li>
-                            <li><a class="dropdown-item" th:href="@{/bank}">銀行檔維護</a></li>
-                            <li><a class="dropdown-item" th:href="@{/user}">使用者維護</a></li> -->
                             <li><a class="dropdown-item" th:if="*{func.parentId == func1.funcId}" 
                                 th:each="func, iterStat : ${funcs}" th:href="${func.funcUrl}" 
                                 th:text="${func.funcName}"></a></li>

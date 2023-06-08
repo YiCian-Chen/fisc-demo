@@ -7,9 +7,29 @@
             <h2 th:text="${'Welcome, ' + name}"></h2>
         </div>
         <div class="card-body" >
-            <h5 class="card-title">This is a simple Spring Boot application.</h5>
-            <p class="card-text">You can use this application to learn how to use Spring Boot.</p>
-            <a href="https://spring.io/projects/spring-boot" class="btn btn-primary">Learn more</a>
+            <h5 class="card-title">預設資料庫使用者</h5>
+            <p class="card-text">帳號: kenny 密碼: 1qaz@WSX</p>
+            <p class="card-text">帳號: steve 密碼: 1qaz@WSX</p>
+            <p class="card-text">帳號: Mary 密碼: 111111</p>
+            <hr>
+            <h5 class="card-title">預設資料庫 role 中的對應 FUNCTIONS</h5>
+            <p class="card-text">名稱: Teller 選單功能權限: system.users / system.roles / fisc.banks</p>
+            <p class="card-text">名稱: Supervisor 選單功能權限: system.users / system.roles / system.permissions</p>
+            <hr>
+        </div>
+        <div class="card-body" style="text-align: left;margin-left: 30%;">
+            <h5 class="card-title">完成項目說明</h5>
+            <p class="card-text">1. 新增功能: 銀行檔維護 (新增/刪除/修改/查詢)</p>
+            <p class="card-text">2. 新增功能: 使用者維護 (新增/刪除/修改/查詢) Hint: 密碼不可以存明碼於資料庫中</p>
+            <p class="card-text" style="color: red;">&nbsp;&nbsp;&nbsp;&nbsp;其中 roleId 使用下拉選單方式填寫，避免 roleId 填寫錯誤</p>
+            <p class="card-text">3. 使登入頁面可以使用新增的使用者登入</p>
+            <p class="card-text">4. 修改預設的使用者，預設新增一個使用者 Mary ，密碼使用111111，其餘隨意</p>
+            <p class="card-text">5. 額外加分題:</p>
+            <p class="card-text">5-1. TopMenu 功能選單從資料庫的 SYS_FUNC 的功能清單中，對應 SYS_ROLE 中的 Functions 來顯示於 TopMenu 上</p>
+            <p class="card-text">5-2. 新增權限維護功能，增加功能清單欄位，可以勾選不同的功能列表</p>
+            <p class="card-text" style="color: red;">&nbsp;&nbsp;&nbsp;&nbsp;勾選不同的權限後，所看到的 TopMenu 清單也會不同</p>
+            <p class="card-text" style="color: red;">&nbsp;&nbsp;&nbsp;&nbsp;新創建的 role 功能清單預設為全部開啟</p>
+            <br>
         </div>
     </div>
 </div>

@@ -19,8 +19,8 @@
                     <th scope="col">Seq</th>
                     <th scope="col">使用者ID</th>
                     <th scope="col">使用者名稱</th>
-                    <th scope="col">權限ID</th>
-                    <th scope="col">密碼</th>
+                    <th scope="col">群組ID</th>
+                    <th scope="col">E-mail</th>
                     <th scope="col">動作<a th:href="@{/user/detail}" class="btn btn-sm btn-danger mx-3">新增</a> </th>
                     </thead>
                     <tbody>
@@ -29,7 +29,7 @@
                         <td th:text="${user.userId}"></td>
                         <td th:text="${user.userName}"></td>
                         <td th:text="${user.roleId}"></td>
-                        <td th:text="${user.password}"></td>
+                        <td th:text="${user.email}"></td>
                         <td th:id="${user.userId}"><a href="#" class="btn btn-sm btn-primary" onclick="modify(this)">維護</a></td>
                     </tr>
                     <tr th:if="${users.isEmpty()}" class="align-middle">

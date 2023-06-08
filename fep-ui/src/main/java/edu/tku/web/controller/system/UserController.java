@@ -18,7 +18,6 @@ import edu.tku.web.entity.CustomUserDetails;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Date;
 
 @Controller
@@ -64,32 +63,19 @@ public class UserController {
         } else {
             user.setBranchId("");
             user.setDepId("");
-            user.setEmail("");
             user.setToken("");
             user.setEnabled(true);
             user.setLastLoginIp("");
             user.setLastLoginTime(new Date());
             // user.setRole(roleRepository.findById(user.getRoleId()));
+            
+            BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
+            user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
+            
             CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if(user.getUserName().equals(customUserDetails.getUsername()))
                 customUserDetails.setRole(roleRepository.findById(user.getRoleId()).get());
             
-            String old_password = "";
-            try{
-                old_password = userRepository.findById(user.getUserId()).get().getPassword();
-            }catch(Exception e){
-                //new user
-                old_password = "";
-            }
-
-            String new_password = user.getPassword();
-            if(new_password.equals(old_password)){
-                user.setPassword(old_password);
-            }else{
-                BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
-                String userPassword = bcryptPasswordEncoder.encode(new_password);
-                user.setPassword(userPassword);
-            }
             userRepository.save(user);
         }
         model.addAttribute("users", userRepository.findAll());

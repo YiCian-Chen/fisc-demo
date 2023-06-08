@@ -14,29 +14,25 @@
         <div class="card-body">
             <form id="dtlForm" th:object="${bank}" method="POST" th:action="@{/bank}" class="need-validated">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" th:field="*{bankCode}" placeholder="行庫代碼" th:readonly="*{bankCode != null && bankCode != ''}" required>
-                    <label for="bankCode">行庫代碼</label>
+                    <input type="text" class="form-control" th:field="*{bankId}" placeholder="行庫代碼" th:readonly="*{bankId != null && bankId != ''}" required>
+                    <label for="bankId">行庫代碼</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" th:field="*{bankName}" placeholder="行庫名稱" required>
                     <label for="bankName">行庫名稱</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" th:field="*{telZone}" placeholder="區碼" required>
-                    <label for="telZone">區碼</label>
+                    <input type="text" class="form-control" th:field="*{bankAddress}" placeholder="地址" required>
+                    <label for="telZone">地址</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" th:field="*{telNo}" placeholder="電話" required>
+                    <input type="text" class="form-control" th:field="*{bankTel}" placeholder="電話" required>
                     <label for="telNo">電話</label>
                 </div>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" th:field="*{updatedate}" placeholder="更新日期" required>
-                    <label for="updatedate">更新日期</label>
-                </div>
                 <input type="hidden" name="action" />
-                <a href="#" class="btn btn-sm btn-primary mx-2" onclick="submit('C')" th:if="*{bankCode == null || bankCode == ''}">新增</a>
-                <a href="#" class="btn btn-sm btn-primary mx-2" onclick="submit('U')" th:if="*{bankCode != null && bankCode != ''}">更新</a>
-                <a href="#" class="btn btn-sm btn-danger mx-2" onclick="submit('D')" th:if="*{bankCode != null && bankCode != ''}">刪除</a>
+                <a href="#" class="btn btn-sm btn-primary mx-2" onclick="submit('C')" th:if="*{bankId == null || bankId == ''}">新增</a>
+                <a href="#" class="btn btn-sm btn-primary mx-2" onclick="submit('U')" th:if="*{bankId != null && bankId != ''}">更新</a>
+                <a href="#" class="btn btn-sm btn-danger mx-2" onclick="submit('D')" th:if="*{bankId != null && bankId != ''}">刪除</a>
                 <a th:href="@{/bank}" class="btn btn-sm btn-secondary mx-2" >返回</a>
             </form>
         </div>

@@ -9,20 +9,20 @@ import javax.persistence.*;
 @Entity
 public class Bank {
     @Id
-    @Column(name = "BANKCODE", length = 3)
-    private String bankCode;
+    @Column(name = "BANK_id", length = 7)
+    private String bankId;
 
-    @Column(name = "BANKNAME", length = 36)
+    @Column(name = "BANK_name", length = 50)
     private String bankName;
 
-    @Column(name = "TELZONE", length = 3)
-    private String telZone;
+    @Column(name = "BANK_address", length = 150)
+    private String bankAddress;
 
-    @Column(name = "TELNO", length = 10)
-    private String telNo;
+    @Column(name = "BANK_tel", length = 15)
+    private String bankTel;
 
-    @Column(name = "UPDATEDATE", length = 8)
-    private String updatedate;
+    @Column(name = "enabled")
+    private boolean enabled;
 
     @Transient
     private String action;

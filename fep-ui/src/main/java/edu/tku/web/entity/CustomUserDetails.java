@@ -2,8 +2,6 @@ package edu.tku.web.entity;
 
 import edu.tku.db.model.User;
 import edu.tku.db.model.Role;
-// import edu.tku.db.repository.RoleRepository;
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,8 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
-    // @Autowired
-    // private RoleRepository roleRepository;
 
     private User user;
     public CustomUserDetails(User user) {

@@ -21,7 +21,6 @@
                     <th scope="col">權限名稱</th>
                     <th scope="col">敘述</th>
                     <th scope="col">動作</th>
-                    <!-- <th scope="col">動作<a th:href="@{/role/detail}" class="btn btn-sm btn-danger mx-3">新增</a> </th> -->
                     </thead>
                     <tbody>
                     <tr th:each="role, iterStat : ${roles}" th:if="${!roles.isEmpty()}" class="align-middle">

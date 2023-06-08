@@ -19,35 +19,33 @@
                     <th scope="col">Seq</th>
                     <th scope="col">行庫代碼</th>
                     <th scope="col">行庫名稱</th>
-                    <th scope="col">區碼</th>
+                    <th scope="col">地址</th>
                     <th scope="col">電話</th>
-                    <th scope="col">更新日期</th>
                     <th scope="col">動作<a th:href="@{/bank/detail}" class="btn btn-sm btn-danger mx-3">新增</a> </th>
                     </thead>
                     <tbody>
                     <tr th:each="bank, iterStat : ${banks}" th:if="${!banks.isEmpty()}" class="align-middle">
                         <td th:text="${iterStat.index + 1}"></td>
-                        <td th:text="${bank.bankCode}"></td>
+                        <td th:text="${bank.bankId}"></td>
                         <td th:text="${bank.bankName}"></td>
-                        <td th:text="${bank.telZone}"></td>
-                        <td th:text="${bank.telNo}"></td>
-                        <td th:text="${bank.updatedate}"></td>
-                        <td th:id="${bank.bankCode}"><a href="#" class="btn btn-sm btn-primary" onclick="modify(this)">維護</a></td>
+                        <td th:text="${bank.bankAddress}"></td>
+                        <td th:text="${bank.bankTel}"></td>
+                        <td th:id="${bank.bankId}"><a href="#" class="btn btn-sm btn-primary" onclick="modify(this)">維護</a></td>
                     </tr>
                     <tr th:if="${banks.isEmpty()}" class="align-middle">
-                        <td colspan="7" class="text-center">找不到資料</td>
+                        <td colspan="6" class="text-center">找不到資料</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <form th:action="@{/bank/detail}" id="queryForm" name="queryForm">
-                <input type="hidden" id="bankCode" name="bankCode"/>
+                <input type="hidden" id="bankId" name="bankId"/>
             </form>
         </div>
         <div class="card-footer">
             <form th:action="@{/bank}" class="m-0">
                 <div class="d-flex flex-row">
-                    <input class="form-control form-control-sm" name="bankcode" placeholder="bank ID"> <input type="submit" class="btn btn-sm btn-primary ms-2" value="查詢" />
+                    <input class="form-control form-control-sm" name="bankId" placeholder="bank ID"> <input type="submit" class="btn btn-sm btn-primary ms-2" value="查詢" />
                 </div>
             </form>
         </div>
@@ -55,9 +53,9 @@
 
 <script >
     function modify(obj){
-        let bankcode = obj.parentElement.id;
+        let bankId = obj.parentElement.id;
         let form = document.querySelector("#queryForm");
-        document.querySelector("#bankcode").value = bankcode;
+        document.querySelector("#bankId").value = bankId;
         form.submit();
     }
 </script>

@@ -14,7 +14,6 @@ import edu.tku.web.entity.CustomUserDetails;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class PermissionController {

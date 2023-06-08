@@ -28,11 +28,14 @@
                         th:text="${role.roleName} + ' - ' + ${role.roleId}"
                         th:selected="${roleId == role.roleId}"></option>
                     </select>
-                    <label for="roleId">權限ID</label>
+                    <label for="roleId">群組ID</label>
                 </div>
-
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" th:field="*{password}" placeholder="密碼" required>
+                    <input type="text" class="form-control" th:field="*{email}" placeholder="E-mail" required>
+                    <label for="email">E-mail</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" th:name="password" th:id="password" placeholder="密碼" required>
                     <label for="password">密碼</label>
                 </div>
                 <input type="hidden" name="action" />
