@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{common/indexLayout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<div layout:fragment="content">
+
+    <div class="card text-center">
+        <div class="card-header align-middle">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="margin-top: 0; margin-bottom: 0;">
+                    <li class="breadcrumb-item"><a href="#">首頁</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">銀行檔維護</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive-xl">
+                <table class="table table-striped table-hover">
+                    <thead class="table-info">
+                    <th scope="col">行庫代碼</th>
+                    <th scope="col">行庫名稱</th>
+                    <th scope="col">區碼</th>
+                    <th scope="col">電話</th>
+                    <th scope="col">更新日期</th>
+                    <th scope="col">動作<a th:href="@{/bank/detail}" class="btn btn-sm btn-danger mx-3">新增</a> </th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="bank, iterStat : ${banks}" th:if="${!banks.isEmpty()}" class="align-middle">
+                        <td th:text="${bank.bankCode}"></td>
+                        <td th:text="${bank.bankName}"></td>
+                        <td th:text="${bank.telZone}"></td>
+                        <td th:text="${bank.telNo}"></td>
+                        <td th:text="${bank.updatedate}"></td>
+                        <td th:id="${bank.bankCode}"><a href="#" class="btn btn-sm btn-primary" onclick="modify(this)">維護</a></td>
+                    </tr>
+                    <tr th:if="${banks.isEmpty()}" class="align-middle">
+                        <td colspan="6" class="text-center">找不到資料</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <form th:action="@{/bank/detail}" id="queryForm" name="queryForm">
+                <input type="hidden" id="bankCode" name="bankCode"/>
+            </form>
+        </div>
+        <div class="card-footer">
+            <form th:action="@{/bank}" class="m-0">
+                <div class="d-flex flex-row">
+                    <input class="form-control form-control-sm" name="bankcode" placeholder="bank ID"> <input type="submit" class="btn btn-sm btn-primary ms-2" value="查詢" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script >
+    function modify(obj){
+        let bankcode = obj.parentElement.id;
+        let form = document.querySelector("#queryForm");
+        document.querySelector("#bankcode").value = bankcode;
+        form.submit();
+    }
+</script>
+</div>
+</body>
+</html>

@@ -37,3 +37,11 @@ create table if not exists ACCESS_LOG (
     response_code varchar(3) not null ,
     response_message text not null
 );
+
+CREATE TABLE FISC_BANK (
+    BANKCODE VARCHAR(3) PRIMARY KEY,
+    BANKNAME VARCHAR(36),
+    TELZONE VARCHAR(3),
+    TELNO VARCHAR(10),
+    UPDATEDATE VARCHAR(8)
+);
