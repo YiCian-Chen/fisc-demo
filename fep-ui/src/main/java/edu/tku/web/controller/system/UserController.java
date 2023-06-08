@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.context.SecurityContextHolder;
+import edu.tku.web.entity.CustomUserDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +40,7 @@ public class UserController {
         }
         model.addAttribute("users", users);
         
-        // top menu
-        List<Func> funcs = new ArrayList<>();
-        funcs.addAll(funcRepository.findAll());
-        model.addAttribute("funcs", funcs);
+        get_TopMenu(model);
         return "system/user";
     }
 
@@ -54,10 +53,7 @@ public class UserController {
         roles.addAll(roleRepository.findAll());
         model.addAttribute("roles", roles);
         
-        // top menu
-        List<Func> funcs = new ArrayList<>();
-        funcs.addAll(funcRepository.findAll());
-        model.addAttribute("funcs", funcs);
+        get_TopMenu(model);
         return "system/userDetail";
     }
 
@@ -74,6 +70,9 @@ public class UserController {
             user.setLastLoginIp("");
             user.setLastLoginTime(new Date());
             // user.setRole(roleRepository.findById(user.getRoleId()));
+            CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if(user.getUserName().equals(customUserDetails.getUsername()))
+                customUserDetails.setRole(roleRepository.findById(user.getRoleId()).get());
             
             String old_password = "";
             try{
@@ -95,10 +94,25 @@ public class UserController {
         }
         model.addAttribute("users", userRepository.findAll());
         
-        // top menu
-        List<Func> funcs = new ArrayList<>();
-        funcs.addAll(funcRepository.findAll());
-        model.addAttribute("funcs", funcs);
+        get_TopMenu(model);
         return "system/user";
+    }
+
+    public void get_TopMenu(Model model) {
+        CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        // get role funcs
+        ArrayList<String> role_func_list = new ArrayList();
+        for (int i = 0; i < customUserDetails.getRole().getFunctions().split(":").length - 1; i++) {
+            role_func_list.add(customUserDetails.getRole().getFunctions().split(":")[i]
+                    .split("\"")[customUserDetails.getRole().getFunctions().split(":")[i].split("\"").length - 1]);
+        }
+
+        // create top menu funcs
+        List<Func> funcs = new ArrayList<>();
+        for (int i = 0; i < role_func_list.size(); i++) {
+            funcRepository.findById(role_func_list.get(i)).ifPresent(func -> funcs.add(func));
+        }
+        model.addAttribute("funcs", funcs);
     }
 }

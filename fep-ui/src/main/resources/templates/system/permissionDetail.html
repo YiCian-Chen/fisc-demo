@@ -1,0 +1,92 @@
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{common/indexLayout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body class="w-100 text-center">
+<th:block layout:fragment="content">
+    <div class="card w-100">
+        <div class="card-header text-start">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb my-2">
+                    <li class="breadcrumb-item"><a th:href="@{/}">首頁</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">權限維護</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="card-body">
+            <form id="dtlForm" th:object="${role}" method="POST" th:action="@{/permission}" class="need-validated">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" th:field="*{roleId}" placeholder="群組ID" th:readonly="*{roleId != null && roleId != ''}" required>
+                    <label for="roleId">群組ID</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" th:field="*{roleName}" placeholder="群組名稱" th:readonly="*{roleId != null && roleId != ''}" required>
+                    <label for="roleName">群組名稱</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" th:field="*{roleDesc}" placeholder="敘述" th:readonly="*{roleId != null && roleId != ''}" required>
+                    <label for="roleDesc">敘述</label>
+                </div>
+                <div class="form-floating mb-3" >
+                    <!-- <input type="checkbox" th:each="func, iterStat : ${funcs}" th:if="${!funcs.isEmpty() && func.funcUrl != '#' && func.funcName eq 'Group Setting'}" th:text="${func.funcName}" th:checked="${func.funcName eq 'Group Setting'}" td:field="${func.funcId}">
+                        <input type="checkbox" th:each="func, iterStat : ${funcs}" th:if="${!funcs.isEmpty() && func.funcUrl != '#' && func.funcName eq 'Permission Setting'}" th:text="${func.funcName}" th:checked="${func.funcName eq 'Permission Setting'}" td:field="${func.funcId}">
+                        <input type="checkbox" th:each="func, iterStat : ${funcs}" th:if="${!funcs.isEmpty() && func.funcUrl != '#' && func.funcName eq 'Bank Setting'}" th:text="${func.funcName}" th:checked="${func.funcName eq 'Bank Setting'}" td:field="${func.funcId}"> -->
+                        <input type="hidden" th:name="user" th:id="userHidden" th:value="off" >
+                        <input type="hidden" th:name="role" th:id="roleHidden" th:value="off">
+                        <input type="hidden" th:name="permission" th:id="permissionHidden" th:value="off">
+                        <input type="hidden" th:name="bank" th:id="bankHidden" th:value="off">
+                </div>
+                <div style="text-align: left;">
+                    <div>
+                        <input type="checkbox" th:checked="${U eq 'on'}" th:name="user" th:id="user" th:value="on">
+                        <label for="user">User Setting</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" th:checked="${R eq 'on'}" th:name="role" th:id="role" th:value="on">
+                        <label for="role">Role Setting</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" th:checked="${P eq 'on'}" th:name="permission" th:id="permission" th:value="on">
+                        <label for="permission">Permission Setting</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" th:checked="${B eq 'on'}" th:name="bank" th:id="bank" th:value="on">
+                        <label for="bank">Bank Setting</label>
+                    </div>
+                </div>
+
+                <input type="hidden" name="action" />
+                <a href="#" class="btn btn-sm btn-primary mx-2" onclick="submit('C')" th:if="*{roleId == null || roleId == ''}">新增</a>
+                <a href="#" class="btn btn-sm btn-primary mx-2" onclick="submit('U')" th:if="*{roleId != null && roleId != ''}">更新</a>
+                <a href="#" class="btn btn-sm btn-danger mx-2" onclick="submit('D')" th:if="*{roleId != null && roleId != ''}">刪除</a>
+                <a th:href="@{/permission}" class="btn btn-sm btn-secondary mx-2" >返回</a>
+            </form>
+        </div>
+    </div>
+    <script>
+        function submit(action){
+            let form = document.querySelector("#dtlForm");
+            form.reportValidity();
+            if (!form.checkValidity() && action != 'D') {
+                return;
+            }
+            form.querySelector("input[name='action']").value = action;
+            form.submit();
+        }
+        form.addEventListener("summit", ()=>{
+            if(document.getElementById("user").checked){
+                document.getElementById("userHidden").disabled = true;
+            }
+            if(document.getElementById("role").checked){
+                document.getElementById("roleHidden").disabled = true;
+            }
+            if(document.getElementById("permission").checked){
+                document.getElementById("permissionHidden").disabled = true;
+            }
+            if(document.getElementById("bank").checked){
+                document.getElementById("bankHidden").disabled = true;
+            }
+        });
+
+    </script>
+</th:block>
+</body>
+</html>

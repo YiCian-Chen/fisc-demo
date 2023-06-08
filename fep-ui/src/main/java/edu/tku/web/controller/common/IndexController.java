@@ -29,10 +29,25 @@ public class IndexController {
         CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("name", customUserDetails.getUsername());
         
-        // top menu
-        List<Func> funcs = new ArrayList<>();
-        funcs.addAll(funcRepository.findAll());
-        model.addAttribute("funcs", funcs);
+        get_TopMenu(model);
         return "index";
+    }
+
+    public void get_TopMenu(Model model) {
+        CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        // get role funcs
+        ArrayList<String> role_func_list = new ArrayList();
+        for (int i = 0; i < customUserDetails.getRole().getFunctions().split(":").length - 1; i++) {
+            role_func_list.add(customUserDetails.getRole().getFunctions().split(":")[i]
+                    .split("\"")[customUserDetails.getRole().getFunctions().split(":")[i].split("\"").length - 1]);
+        }
+
+        // create top menu funcs
+        List<Func> funcs = new ArrayList<>();
+        for (int i = 0; i < role_func_list.size(); i++) {
+            funcRepository.findById(role_func_list.get(i)).ifPresent(func -> funcs.add(func));
+        }
+        model.addAttribute("funcs", funcs);
     }
 }

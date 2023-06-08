@@ -7,7 +7,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb my-2">
                     <li class="breadcrumb-item"><a th:href="@{/}">首頁</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">權限維護</li>
+                    <li class="breadcrumb-item active" aria-current="page">群組維護</li>
                 </ol>
             </nav>
         </div>
@@ -22,7 +22,7 @@
                     <label for="roleName">群組名稱</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" th:field="*{roleDesc}" placeholder="系統別" required>
+                    <input type="text" class="form-control" th:field="*{roleDesc}" placeholder="敘述" required>
                     <label for="roleDesc">敘述</label>
                 </div>
                 <input type="hidden" name="action" />

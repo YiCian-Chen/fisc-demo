@@ -8,7 +8,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="margin-top: 0; margin-bottom: 0;">
                     <li class="breadcrumb-item"><a href="#">首頁</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">群組維護</li>
+                    <li class="breadcrumb-item active" aria-current="page">權限維護</li>
                 </ol>
             </nav>
         </div>
@@ -17,10 +17,11 @@
                 <table class="table table-striped table-hover">
                     <thead class="table-info">
                     <th scope="col">Seq</th>
-                    <th scope="col">群組ID</th>
-                    <th scope="col">群組名稱</th>
+                    <th scope="col">權限ID</th>
+                    <th scope="col">權限名稱</th>
                     <th scope="col">敘述</th>
-                    <th scope="col">動作<a th:href="@{/role/detail}" class="btn btn-sm btn-danger mx-3">新增</a> </th>
+                    <th scope="col">動作</th>
+                    <!-- <th scope="col">動作<a th:href="@{/role/detail}" class="btn btn-sm btn-danger mx-3">新增</a> </th> -->
                     </thead>
                     <tbody>
                     <tr th:each="role, iterStat : ${roles}" th:if="${!roles.isEmpty()}" class="align-middle">
@@ -36,12 +37,12 @@
                     </tbody>
                 </table>
             </div>
-            <form th:action="@{/role/detail}" id="queryForm" name="queryForm">
+            <form th:action="@{/permission/detail}" id="queryForm" name="queryForm">
                 <input type="hidden" id="roleId" name="roleId"/>
             </form>
         </div>
         <div class="card-footer">
-            <form th:action="@{/role}" class="m-0">
+            <form th:action="@{/permission}" class="m-0">
                 <div class="d-flex flex-row">
                     <input class="form-control form-control-sm" name="roleId" placeholder="Role ID"> <input type="submit" class="btn btn-sm btn-primary ms-2" value="查詢" />
                 </div>
