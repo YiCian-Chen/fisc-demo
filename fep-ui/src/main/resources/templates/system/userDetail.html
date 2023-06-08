@@ -20,11 +20,7 @@
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" th:field="*{userName}" placeholder="使用者名稱" required>
                     <label for="userName">使用者名稱</label>
-                </div>
-                <!-- <div class="form-floating mb-3">
-                    <input type="text" class="form-control" th:field="*{roleId}" placeholder="權限ID" required>
-                    <label for="roleId">權限ID</label>
-                </div> -->                
+                </div>             
                 <div class="form-floating">
                     <select class="form-control" th:field="*{roleId}">
                         <option th:each="role : ${roles}"

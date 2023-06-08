@@ -1,7 +1,9 @@
 package edu.tku.web.controller.system;
 
 import edu.tku.db.model.Role;
+import edu.tku.db.model.Func;
 import edu.tku.db.repository.RoleRepository;
+import edu.tku.db.repository.FuncRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ import java.util.Optional;
 public class RoleController {
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private FuncRepository funcRepository;
 
     @GetMapping("/role")
     public String page(Model model, @RequestParam(name = "roleId", required = false) String roleId) {
@@ -26,12 +30,22 @@ public class RoleController {
             roles.addAll(roleRepository.findAll());
         }
         model.addAttribute("roles", roles);
+
+        // top menu
+        List<Func> funcs = new ArrayList<>();
+        funcs.addAll(funcRepository.findAll());
+        model.addAttribute("funcs", funcs);
         return "system/role";
     }
     @GetMapping("/role/detail")
     public String pageDetail(Model model, @RequestParam(name = "roleId", required = false) String roleId) {
         Role role = roleRepository.findById(StringUtils.defaultString(roleId, "")).orElse(new Role());
         model.addAttribute("role", role);
+        
+        // top menu
+        List<Func> funcs = new ArrayList<>();
+        funcs.addAll(funcRepository.findAll());
+        model.addAttribute("funcs", funcs);
         return "system/roleDetail";
     }
     @PostMapping("/role")
@@ -42,6 +56,11 @@ public class RoleController {
             roleRepository.save(role);
         }
         model.addAttribute("roles", roleRepository.findAll());
+        
+        // top menu
+        List<Func> funcs = new ArrayList<>();
+        funcs.addAll(funcRepository.findAll());
+        model.addAttribute("funcs", funcs);
         return "system/role";
     }
 

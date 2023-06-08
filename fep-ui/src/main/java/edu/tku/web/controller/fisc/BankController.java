@@ -1,9 +1,9 @@
 package edu.tku.web.controller.fisc;
 
 import edu.tku.db.model.Bank;
-// import edu.tku.db.model.bank;
-// import edu.tku.db.repository.bankRepository;
+import edu.tku.db.model.Func;
 import edu.tku.db.repository.BankRepository;
+import edu.tku.db.repository.FuncRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +18,8 @@ import java.util.Optional;
 public class BankController {
     @Autowired
     private BankRepository bankRepository;
+    @Autowired
+    private FuncRepository funcRepository;
 
     @GetMapping("/bank")
     public String page(Model model, @RequestParam(name = "bankcode", required = false) String bankcode) {
@@ -28,12 +30,22 @@ public class BankController {
             banks.addAll(bankRepository.findAll());
         }
         model.addAttribute("banks", banks);
+        
+        // top menu
+        List<Func> funcs = new ArrayList<>();
+        funcs.addAll(funcRepository.findAll());
+        model.addAttribute("funcs", funcs);
         return "fisc/bank";
     }
     @GetMapping("/bank/detail")
     public String pageDetail(Model model, @RequestParam(name = "bankCode", required = false) String bankCode) {
         Bank bank = bankRepository.findById(StringUtils.defaultString(bankCode, "")).orElse(new Bank());
         model.addAttribute("bank", bank);
+        
+        // top menu
+        List<Func> funcs = new ArrayList<>();
+        funcs.addAll(funcRepository.findAll());
+        model.addAttribute("funcs", funcs);
         return "fisc/bankDetail";
     }
     @PostMapping("/bank")
@@ -44,6 +56,11 @@ public class BankController {
             bankRepository.save(bank);
         }
         model.addAttribute("banks", bankRepository.findAll());
+        
+        // top menu
+        List<Func> funcs = new ArrayList<>();
+        funcs.addAll(funcRepository.findAll());
+        model.addAttribute("funcs", funcs);
         return "fisc/bank";
     }
 
