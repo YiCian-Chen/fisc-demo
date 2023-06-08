@@ -4,6 +4,7 @@ import edu.tku.db.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Collection;
 
@@ -20,6 +21,11 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
+        // BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
+        // String a = bcryptPasswordEncoder.encode("1qaz@WSX");
+        // String b = bcryptPasswordEncoder.encode("1qaz@WSX");
+        // boolean c1 = bcryptPasswordEncoder.matches("1qaz@WSX",a);
+        // boolean c2 = bcryptPasswordEncoder.matches("1qaz@WSX",b);
         return user.getPassword();
     }
 

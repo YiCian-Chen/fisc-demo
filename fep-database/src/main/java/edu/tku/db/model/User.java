@@ -33,6 +33,8 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
+    @Transient
+    private String action;
 
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "role_id", insertable = false, updatable = false)

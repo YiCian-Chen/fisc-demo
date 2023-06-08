@@ -16,6 +16,7 @@
             <div class="table-responsive-xl">
                 <table class="table table-striped table-hover">
                     <thead class="table-info">
+                    <th scope="col">Seq</th>
                     <th scope="col">行庫代碼</th>
                     <th scope="col">行庫名稱</th>
                     <th scope="col">區碼</th>
@@ -25,6 +26,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="bank, iterStat : ${banks}" th:if="${!banks.isEmpty()}" class="align-middle">
+                        <td th:text="${iterStat.index + 1}"></td>
                         <td th:text="${bank.bankCode}"></td>
                         <td th:text="${bank.bankName}"></td>
                         <td th:text="${bank.telZone}"></td>
@@ -33,7 +35,7 @@
                         <td th:id="${bank.bankCode}"><a href="#" class="btn btn-sm btn-primary" onclick="modify(this)">維護</a></td>
                     </tr>
                     <tr th:if="${banks.isEmpty()}" class="align-middle">
-                        <td colspan="6" class="text-center">找不到資料</td>
+                        <td colspan="7" class="text-center">找不到資料</td>
                     </tr>
                     </tbody>
                 </table>

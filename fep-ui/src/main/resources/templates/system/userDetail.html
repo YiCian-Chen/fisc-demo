@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{common/indexLayout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body class="w-100 text-center">
+<th:block layout:fragment="content">
+    <div class="card w-100">
+        <div class="card-header text-start">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb my-2">
+                    <li class="breadcrumb-item"><a th:href="@{/}">首頁</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">使用者維護</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="card-body">
+            <form id="dtlForm" th:object="${user}" method="POST" th:action="@{/user}" class="need-validated">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" th:field="*{userId}" placeholder="使用者ID" th:readonly="*{userId != null && userId != ''}" required>
+                    <label for="userId">使用者ID</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" th:field="*{userName}" placeholder="使用者名稱" required>
+                    <label for="userName">使用者名稱</label>
+                </div>
+                <!-- <div class="form-floating mb-3">
+                    <input type="text" class="form-control" th:field="*{roleId}" placeholder="權限ID" required>
+                    <label for="roleId">權限ID</label>
+                </div> -->                
+                <div class="form-floating">
+                    <select class="form-control" th:field="*{roleId}">
+                        <option th:each="role : ${roles}"
+                        th:value="${role.roleId}"
+                        th:text="${role.roleName} + ' - ' + ${role.roleId}"
+                        th:selected="${roleId == role.roleId}"></option>
+                    </select>
+                    <label for="roleId">權限ID</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" th:field="*{password}" placeholder="密碼" required>
+                    <label for="password">密碼</label>
+                </div>
+                <input type="hidden" name="action" />
+                <a href="#" class="btn btn-sm btn-primary mx-2" onclick="submit('C')" th:if="*{userId == null || userId == ''}">新增</a>
+                <a href="#" class="btn btn-sm btn-primary mx-2" onclick="submit('U')" th:if="*{userId != null && userId != ''}">更新</a>
+                <a href="#" class="btn btn-sm btn-danger mx-2" onclick="submit('D')" th:if="*{userId != null && userId != ''}">刪除</a>
+                <a th:href="@{/user}" class="btn btn-sm btn-secondary mx-2" >返回</a>
+            </form>
+        </div>
+    </div>
+    <script>
+        function submit(action){
+            let form = document.querySelector("#dtlForm");
+            form.reportValidity();
+            if (!form.checkValidity() && action != 'D') {
+                return;
+            }
+            form.querySelector("input[name='action']").value = action;
+            form.submit();
+        }
+
+    </script>
+</th:block>
+</body>
+</html>
